@@ -64,9 +64,9 @@ WSGI_APPLICATION = 'Solaris_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'solarisdb',
-        'USER': 'root',
-        'PASSWORD': 'admin',
+        'NAME': 'you_db_name',
+        'USER': 'your_user',
+        'PASSWORD': 'your_password',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -121,9 +121,9 @@ AUTH_USER_MODEL = 'solaris_app.User'
 # Configuración para enviar correos electrónicos
 # Aquí se configura el servidor de correo electrónico
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
+EMAIL_HOST = 'smtp.mail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'karen.rodriguez14@inacapmail.cl'
-EMAIL_HOST_PASSWORD = 'Gatito23.'
-DEFAULT_FROM_EMAIL = 'karen.rodriguez14@inacapmail.cl'
+EMAIL_HOST_USER = 'your_email'
+EMAIL_HOST_PASSWORD = 'your_password'
+DEFAULT_FROM_EMAIL = 'your_email'
