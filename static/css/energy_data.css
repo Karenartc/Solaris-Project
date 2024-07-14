@@ -1,0 +1,105 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.navbar .navbar-brand img {
+    width: 150px;
+    height: auto;
+}
+
+.navbar h3 {
+    font-size: 18px;
+    margin: 0 20px 0 0;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu .btn-link {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.navbar-menu .btn-link i {
+    font-size: 2.5rem;
+}
+
+.navbar-menu .btn-link span {
+    margin-left: 5px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.dropdown {
+    position: relative;
+    margin-right: 15px; 
+}
+
+.dropdown .btn {
+    font-size: 15px;
+    padding: 10px 20px;
+}
+
+.dropdown-menu {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dropdown-menu a {
+    color: #000; 
+    text-decoration: none; 
+    display: block; 
+    padding: 10px 16px; 
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s; 
+}
+
+.table th,
+.table td {
+    border: none; 
+    padding: 12px; 
+    text-align: center;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+

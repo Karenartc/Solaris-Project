@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestión de Usuarios{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="../../../static/css/register.css">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Gestión de Usuarios</h1>
+    <a href="{% url 'user_add' %}" class="btn btn-primary mb-3">Agregar Usuario</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre de Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <a href="{% url 'user_edit' user.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{% url 'user_delete' user.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

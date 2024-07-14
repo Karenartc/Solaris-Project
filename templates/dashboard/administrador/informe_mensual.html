@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Informe Mensual{% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="../../../static/css/dashboard_administrador.css">
+{% endblock %}
+
+{% block body %}
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="navbar-brand">
+                <img class="mb-3" src="../../../static/img/logo.png" alt="" width="100" height="100">
+            </div>
+            <div>
+                <h3 class="navbar-title">Administrador</h3>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="{% url 'dashboard_administrador' %}" class="btn btn-link p-0 d-flex align-items-center text-decoration-none">
+                <i class="bi bi-arrow-left-short text-black"></i>
+                <span class="ms-1 text-black">volver</span>
+            </a>
+            <div class="dropdown ms-3">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> {{ user.first_name }} {{ user.last_name }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Informe Mensual</h1>
+        <button id="downloadPdfButton" class="btn btn-primary">Descargar PDF</button>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-0">Métricas Resumen</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Potencia Generada Total:</strong> La suma total de la potencia generada por los propietarios de vivienda.</p>
+            <p><strong>Energía Acumulada Total:</strong> La suma total de la energía acumulada por los propietarios de vivienda.</p>
+            <p><strong>Eficiencia Promedio:</strong> El promedio de la eficiencia de los sistemas de generación de energía de los propietarios de vivienda.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Potencia Generada Total:</strong> {{ total_potencia_generada|floatformat:2 }} W</li>
+                <li class="list-group-item"><strong>Energía Acumulada Total:</strong> {{ total_energia_acumulada|floatformat:2 }} kWh</li>
+                <li class="list-group-item"><strong>Eficiencia Promedio:</strong> {{ eficiencia_promedio|floatformat:2 }} %</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('downloadPdfButton').addEventListener('click', function() {
+        window.location.href = "{% url 'generar_pdf' %}";
+    });
+</script>
+{% endblock %}

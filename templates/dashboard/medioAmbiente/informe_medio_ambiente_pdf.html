@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Medio Ambiente</title>
+</head>
+<body>
+    <h1>Informe Mensual de Ingresos</h1>
+    
+    <h2>Ventas de Energía</h2>
+    <p>Total: {{ income_data.total_energy_sales }}</p>
+    
+    <h2>Participación en la Comunidad</h2>
+    <p>Total: {{ income_data.total_community_participation }}</p>
+    
+    <h2>Tarifas de Conexión</h2>
+    <p>Total: {{ income_data.total_connection_fees }}</p>
+    
+    <h2>Producción de Energía</h2>
+    <p>Potencia generada: {{ income_data.total_power_generated }}</p>
+    <p>Energía acumulada: {{ income_data.total_accumulated_energy }}</p>
+</body>
+</html>

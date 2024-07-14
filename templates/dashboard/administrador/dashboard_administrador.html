@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Administrador{% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="../../../static/css/dashboard_administrador.css">
+{% endblock %}
+
+{% block body %}
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="navbar-brand">
+                <img class="mb-3" src="../../../static/img/logo.png" alt="" width="150" height="auto">
+            </div>
+            <div>
+                <h3 class="navbar-title">Administrador</h3>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="dropdown ms-3">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> {{ user.first_name }} {{ user.last_name }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container text-center">
+    <h1>Panel de Control</h1>
+    <div class="row">
+        {% for entry in data %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Resumen del Estado del Sistema Solar</h5>
+                        <p>Potencia Generada Total: {{ entry.total_power_generated|floatformat:2 }} kW</p>
+                        <p>Energía Acumulada Total: {{ entry.total_energy|floatformat:2 }} kWh</p>
+                        <p>Eficiencia Promedio: {{ entry.avg_efficiency|floatformat:2 }}</p>
+                        <a href="{% url 'detalles_propietario' entry.homeowner.id %}" class="btn btn-warning">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Tabla de Gestión de Usuarios -->
+<div class="mt-2">
+    <div class="card-header">
+        <h1>Gestión de Usuarios</h1>
+        <a href="{% url 'add_user' %}" class="btn btn-primary mb-3">Agregar Usuario</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Número de teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        <td>{{ user.rut }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.phone_number }}</td>
+                        <td>
+                            <a href="{% url 'edit_user' user.id %}" class="btn btn-success btn-sm"><i class="bi bi-pencil-fill"></i></a>
+                            <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este usuario?')"><i class="bi bi-trash-fill"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Sección de Informe Mensual -->
+<div class="mt-2 text-center">
+    <div class="card-header">
+        <h1>Informe Mensual</h1>
+        <button id="viewReportButton" class="btn btn-primary">Ver Informe</button>
+        <button id="downloadPdfButton" class="btn btn-primary">Descargar PDF</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('viewReportButton').addEventListener('click', function() {
+        window.location.href = "{% url 'informe_mensual' %}";
+    });
+
+    document.getElementById('downloadPdfButton').addEventListener('click', function() {
+        window.location.href = "{% url 'generar_pdf' %}";
+    });
+</script>
+{% endblock %}

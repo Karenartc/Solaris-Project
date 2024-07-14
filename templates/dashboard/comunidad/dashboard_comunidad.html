@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Miembro de la Comunidad{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="../../static/css/dashboard_comunidad.css">
+{% endblock %}
+
+{% block body %}
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="navbar-brand">
+                <img class="mb-3" src="../../static/img/logo.png" alt="" width="150" height="auto">
+            </div>
+            <div>
+                <h3 class="navbar-title">Miembro de la Comunidad</h3>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="dropdown ms-3">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> {{ user.first_name }} {{ user.last_name }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- SUMA DE CONSUMOS -->
+<div class="container">
+    <h2>Consumo de energía personal</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="../../../static/img/dia.png" class="card-img-top" alt="icon de dia">
+                <div class="card-body">
+                    <h5 class="card-title">Consumo Diario</h5>
+                    <p class="card-text">{{ daily_total|floatformat:2 }} kWh</p>
+                </div>
+                <a href="{% url 'daily_consumption_detail' %}" class="btn btn-warning">Detalle</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="../../../static/img/semana.png" class="card-img-top" alt="icon de semana">
+                <div class="card-body">
+                    <h5 class="card-title">Consumo Semanal</h5>
+                    <p class="card-text">{{ weekly_total|floatformat:2 }} kWh</p>
+                </div>
+                <a href="{% url 'weekly_consumption_detail' %}" class="btn btn-warning">Detalle</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="../../../static/img/mes.png" class="card-img-top" alt="icon de dia">
+                <div class="card-body">
+                    <h5 class="card-title">Consumo Mensual</h5>
+                    <p class="card-text">{{ monthly_total|floatformat:2 }} kWh</p>
+                </div>
+                <a href="{% url 'monthly_consumption_detail' %}" class="btn btn-warning">Detalle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTRIBUCIÓN A LA RED COMUNITARIA -->
+<div class="container">
+    <h2>Contribución de energía personal</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card custom-card">
+                <img src="../../../static/img/energiatotal.png" class="card-img-top" alt="icon de energía compartida">
+                <div class="card-body">
+                    <h5 class="card-title">Energía Total Compartida</h5>
+                    <p class="card-text">{{ total_energy_shared|floatformat:2 }} kWh</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card custom-card">
+                <img src="../../../static/img/impactoambiental.png" class="card-img-top" alt="icon de impacto ambiental">
+                <div class="card-body">
+                    <h5 class="card-title">Impacto Ambiental Positivo</h5>
+                    <p class="card-text">{{ environmental_impact|floatformat:2 }} kg de CO2</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card custom-card">
+                <img src="../../../static/img/ahorro.png" class="card-img-top" alt="icon de ahorros">
+                <div class="card-body">
+                    <h5 class="card-title">Ahorros Totales Generados</h5>
+                    <p class="card-text">${{ savings_generated|floatformat:2 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Aquí puedes colocar tu script JavaScript si es necesario
+</script>
+{% endblock %}

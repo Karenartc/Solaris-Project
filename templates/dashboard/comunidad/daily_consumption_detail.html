@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de Consumo Diario{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="../../../static/css/consumption_detail.css">
+{% endblock %}
+
+{% block body %}
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="navbar-brand">
+                <img class="mb-3" src="../../../static/img/logo.png" alt="" width="100" height="100">
+            </div>
+            <div>
+                <h3 class="navbar-title">Miembro de la Comunidad</h3>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="{% url 'dashboard_comunidad' %}" class="btn btn-link p-0 d-flex align-items-center text-decoration-none">
+                <i class="bi bi-arrow-left-short text-black"></i>
+                <span class="ms-1 text-black">volver</span>
+            </a>
+            <div class="dropdown ms-3">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> {{ user.first_name }} {{ user.last_name }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- DETALLE DE CONSUMO DIARIO -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Detalle de Consumo Diario</h2>
+            <table class="table table-borderless table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Numeración</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th scope="col">Consumo (kWh)</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group">
+                    {% for record in daily_consumption %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ record.timestamp }}</td>
+                            <td>{{ record.amount|floatformat:4 }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

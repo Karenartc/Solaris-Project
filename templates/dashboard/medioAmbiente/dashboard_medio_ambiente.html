@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Medio Ambiente{% endblock %}
+
+{% block customCSS %}
+    <link rel="stylesheet" href="../../../static/css/dashboard_administrador.css">
+{% endblock %}
+
+{% block body %}
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="navbar-brand">
+                <img class="mb-3" src="../../../static/img/logo.png" alt="" width="150" height="auto">
+            </div>
+            <div>
+                <h3 class="navbar-title">Medio Ambiente</h3>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="dropdown ms-3">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i> {{ user.first_name }} {{ user.last_name }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="text-center mb-4">
+        <h2>Informes</h2>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Ingresos Mensuales</h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Participación en Red Comunitaria:</strong> ${{ income_data.total_community_participation|floatformat:2 }}</li>
+                <li class="list-group-item"><strong>Tarifas de Conexión:</strong> ${{ income_data.total_connection_fees|floatformat:2 }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Producción de Energía</h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Potencia Generada:</strong> {{ income_data.total_power_generated|floatformat:2 }} W</li>
+                <li class="list-group-item"><strong>Energía Acumulada:</strong> {{ income_data.total_accumulated_energy|floatformat:2 }} kWh</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'generate_pdf_medioAmbiente' %}" class="btn btn-primary">Descargar PDF</a>
+    </div>
+</div>
+{% endblock %}

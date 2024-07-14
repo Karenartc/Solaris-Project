@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}Regístrate{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="../../static/css/register.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="d-flex align-items-center mt-2">
+        <!-- Enlace de la flecha -->
+        <a href="{% url 'login' %}" class="btn btn-link p-0 d-flex align-items-center text-decoration-none">
+            <i class="bi bi-arrow-left-short text-black" style="font-size: 1.5rem;"></i>
+            <span class="ms-1 text-black">volver</span>
+        </a>
+        <!-- Título "Regístrate" centrado -->
+        <h2 class="ms-auto text-center w-100">Regístrate</h2>
+    </div>
+    <form method="POST" autocomplete="off" class="mt-2">
+        <!-- <h2>Regístrate</h2> -->
+        {% csrf_token %}
+
+        <!-- Nombre y Apellido -->
+        <div class="row g-3 mb-4 mt-1">
+            <div class="col">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.first_name.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.last_name.errors }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Nombre de usuario -->
+        <div class="col mb-4">
+            {{ form.username.label_tag }}
+            <div class="input-group">
+                <div class="input-group-text">@</div>
+                {{ form.username }}
+            </div>
+            {% if form.username.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.username.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Rut -->
+        <div class="col mb-4">
+            {{ form.rut.label_tag }}
+            {{ form.rut }}
+            {% if form.rut.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.rut.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Correo -->
+        <div class="col mb-4">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.email.errors }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Contraseñas -->
+        <div class="row g-3 mb-4">
+            <div class="col">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.password1.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.password2.errors }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Rol -->
+        <div class="mb-4">
+            <div class="col-auto">
+                {{ form.role.label_tag }}
+                {{ form.role }}
+                {% if form.role.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.role.errors }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Género y edad -->
+        <div class="row g-3 mb-4">
+            <div class="col">
+                <div class="col-auto">
+                    {{ form.gender.label_tag }}
+                    {{ form.gender }}
+                    {% if form.gender.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ form.gender.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                {{ form.age.label_tag }}
+                {{ form.age }}
+                {% if form.age.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.age.errors }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Dirección -->
+        <div class="col mb-4">
+            {{ form.address.label_tag }}
+            {{ form.address }}
+            {% if form.address.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.address.errors }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Número de teléfono -->
+        <div class="col mb-4">
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {% if form.phone_number.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.phone_number.errors }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary mb-3">Regístrate</button>
+    </form>
+</div>
+{% endblock %}
